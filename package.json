@@ -1,0 +1,41 @@
+{
+  "name": "noisy-quill-authority",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon --watch src --ext ts --exec tsx src/app.ts",
+    "build": "tsc",
+    "start": "node dist/app.js",
+    "lint": "eslint ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ThienTuTran/noisy-quill-authority.git"
+  },
+  "keywords": [],
+  "author": "Thien Tu Tran",
+  "license": "ISC",
+  "type": "module",
+  "bugs": {
+    "url": "https://github.com/ThienTuTran/noisy-quill-authority/issues"
+  },
+  "homepage": "https://github.com/ThienTuTran/noisy-quill-authority#readme",
+  "dependencies": {
+    "bcrypt": "^6.0.0",
+    "bcryptjs": "^3.0.3",
+    "dotenv": "^17.2.3",
+    "express": "^5.1.0",
+    "jose": "^6.1.0"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.5",
+    "@types/node": "^24.10.0",
+    "eslint": "^9.39.1",
+    "nodemon": "^3.1.10",
+    "prettier": "^3.6.2",
+    "ts-node": "^10.9.2",
+    "tsx": "^4.20.6",
+    "typescript": "^5.9.3"
+  }
+}
