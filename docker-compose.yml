@@ -1,0 +1,9 @@
+services:
+  quill_authority:
+    build: .
+    image: quill_authority:v1.2
+    container_name: quill_authority
+    env_file: .env
+    ports:
+      - "8080:8080"
+    restart: unless-stopped
