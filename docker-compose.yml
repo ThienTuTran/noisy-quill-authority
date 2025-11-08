@@ -1,7 +1,7 @@
 services:
   quill_authority:
     build: .
-    image: quill_authority:v1.2
+    image: quill_authority:v1.2.10
     container_name: quill_authority
     env_file: .env
     ports:
