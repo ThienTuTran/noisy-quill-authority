@@ -1,22 +1,24 @@
 import { Router } from "express";
 import { landing, adminJWKS, tenantJWKS, api, profile, robots } from "./controllers/public.js";
 import { flag } from "./controllers/admin.js";
-import { jwksTest } from "./controllers/debug.js";
+import { debug, jwksTest } from "./controllers/debug.js";
 import { requireAuth, requireAdmin } from "./middleware/auth.js";
-import { login } from "./controllers/login.js";
+import { getLogin, postLogin } from "./controllers/login.js";
 
 const r = Router();
 
 r.get("/", landing);
 r.get("/robots.txt", robots);
 r.get("/api", api);
+r.get("/api/debug",requireAuth, debug);
 
 // Public JWKS endpoints
 r.get("/admin-jwks.json", adminJWKS);
 r.get("/tenant-jwks.json", tenantJWKS);
 
 // Auth
-r.post("/api/login", login);
+r.get("/api/login", getLogin);
+r.post("/api/login", postLogin);
 r.get("/api/profile", requireAuth, profile);
 
 // Admin

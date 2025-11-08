@@ -13,7 +13,16 @@ async function getCustomerPrivateKey() {
   return importPKCS8(pkcs8, "RS256");
 }
 
-export async function login(req: Request, res: Response) {
+export async function getLogin(_req: Request, res: Response) {
+  res.json({
+    endpoint: "/api/login",
+    method: "POST",
+    body: { username: "string", password: "string" },
+    behavior: "Authenticates a user and returns a JWT."
+  });
+}
+
+export async function postLogin(req: Request, res: Response) {
   const { username, password } = req.body || {};
   if (!username || !password) return res.status(400).json({ error: "username and password required" });
 

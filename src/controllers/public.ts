@@ -4,7 +4,7 @@ import { readAdminPublicPem, jwkFromPem, readCustomerPublicPem, jwkFromCustomerP
 export async function landing(_req: Request, res: Response) {
   res.json({
     message: "NOISY_ECHIDNA Quill Authority",
-    version: "1.0.0"
+    version: "1.2.10"
     });
 }
 
@@ -33,5 +33,5 @@ export function profile(req: Request, res: Response) {
 }
 
 export function robots(_req: Request, res: Response) {
-  res.type("text/plain").send("User-agent: *\nDisallow: /api/debug/jwks-test\n");
+  res.type("text/plain").send("User-agent: *\nDisallow: /api/admin\n");
 }
