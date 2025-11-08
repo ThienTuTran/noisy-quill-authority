@@ -2,6 +2,16 @@ import type { Request, Response } from "express";
 import { fetchJWKS, setJWKS } from "../lib/jwksStore.js";
 import { jwtVerify, createLocalJWKSet } from "jose";
 
+export async function debug(_req: Request, res: Response) {
+  res.json({
+    endpoint: "/api/debug/jwks-test",
+    method: "POST",
+    body: { issuer: "string", jwks_url: "url", token: "jwt" },
+    behavior: "Fetches JWKS and caches it by issuer, then verifies the token against that cache.",
+    warning: "Not for production use."
+  });
+}
+
 export async function jwksTest(req: Request, res: Response) {
   try {
     const { issuer, jwks_url, token } = req.body || {};
