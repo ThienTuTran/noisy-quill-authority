@@ -20,13 +20,28 @@ async function ensureJWKSPrimed(iss: string) {
 
 export async function requireAuth(req: Request, res: Response, next: NextFunction) {
   try {
+    // 1) Pull bearer
     const hdr = req.headers.authorization || "";
     const token = hdr.startsWith("Bearer ") ? hdr.slice(7) : "";
     if (!token) return res.status(401).json({ error: "missing bearer token" });
+    
+    // 2) Validate structure "<hdr>.<payload>.<sig>"
+    const parts = token.split(".");
+    if (parts.length !== 3) return res.status(401).json({ error: "invalid token format" });
 
-    const payloadB64 = token.split(".")[1];
-    const claims = JSON.parse(Buffer.from(payloadB64, "base64url").toString());
-    const iss = claims?.iss;
+    const payloadB64 = parts[1]; 
+
+    // 3) Decode payload safely
+    let claims: Record<string, unknown>;
+    try {
+      const buf = Buffer.from(payloadB64 as string, "base64url"); // explicit encode
+      claims = JSON.parse(buf.toString("utf8"));
+    } catch {
+      return res.status(401).json({ error: "invalid token payload" });
+    }
+
+    // 4) Read claims with narrowing
+    const iss = typeof claims.iss === "string" ? claims.iss : "";
     if (!iss) return res.status(401).json({ error: "missing iss" });
 
     await ensureJWKSPrimed(iss);
