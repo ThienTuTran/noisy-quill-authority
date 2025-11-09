@@ -15,7 +15,11 @@ Players receive one low-privilege credential (customer:strong@password) and must
    ```sh
    git clone https://github.com/ThienTuTran/noisy-quill-authority.git
    ```
-2. Run with Docker
+2. Copy .env
+   ```sh
+   cp .env.example .env
+   ```
+3. Run with Docker
    ```sh
    docker compose up -d --build
    ```
